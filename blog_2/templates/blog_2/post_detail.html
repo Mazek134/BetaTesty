@@ -1,0 +1,70 @@
+{% extends 'blog_2/base.html' %}
+
+{% block tit %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="obrazekPostDetail">
+     {% with 'images/'|add:post.title|add:'.jpg' as image_static %}
+     <img src="{% static image_static %}"width="100%" height="100%"/>
+    {% endwith %}
+</div>
+<br>
+<p class="'date">
+    opublikowany {{post.publish}} przez {{post.author}}
+</p>
+{{post.body|linebreaks}}
+{% with comments.count as total_comments %}
+<h5>
+    {{total_comments}} komentarz{{total_comments|pluralize:"y"}}
+</h5>
+{% endwith %}
+Podobne posty :
+{% for post in similar_posts %}
+    <a href= "{{ post.get_absolute_url }}" >
+    {{post.title}}
+</a>
+{% empty %}
+Nie ma podobnych postow
+{% endfor %}
+<br>
+{% for comment in comments %}
+<div class="comment">
+    <div class="com_detail">
+   <b>&nbsp komentarz {{forloop.counter}} dodany przez {{comment.name }}
+       {{comment.created}}</b>
+    </div>
+    <div class="body_com">
+   {{comment.body|linebreaks }}
+    </div>
+</div>
+{% empty %}
+nie ma jeszcze komentarzy
+{% endfor %}
+
+{% if new_comment %}
+twoj komentarz zostal dodany
+{% else %}
+
+
+<h3>
+dodaj nowy komentarz
+</h3>
+<form action="." method="post">
+    {{comment_form.as_p}}
+    {% csrf_token %}
+
+    {% if user.is_authenticated %}
+    <p><input type="submit" value="dodaj komentarz"></p>
+    {% else %}
+    <a href="{% url 'login' %}">zaloguj</a>
+     sie aby dodać komentarz
+    {% endif %}
+</form>
+{% endif %}
+
+{% endblock %}
+
+

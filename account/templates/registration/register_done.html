@@ -1,0 +1,7 @@
+{% extends 'blog_2/base.html' %}
+{% block content %}
+Pomyślnie utworzono konto dla {{ new_user.username }}
+mozesz teraz sie <a href="{% url 'login' %}" >
+    zalogowac
+</a>
+{% endblock %}

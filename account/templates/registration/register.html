@@ -1,0 +1,32 @@
+{% extends 'blog_2/base.html' %}
+{% block content %}
+<div class="panelrejestracji">
+    <div class="oknorejestracji">
+        <div class="polowaObrazek">
+             {% load static %}
+            <div class="obrazekRejestracja">
+        <img src="{% static 'images/obrazek_rejestracja.png' %}"width="350" height="350"/>
+                </div>
+             <div class="polowaform">
+                 <b>
+            <p style="text-align: center">Utwórz konto</p>
+                     </b>
+                 <form action="." method="post">
+                     <div class="polaformularza">
+                     {{ user_form.as_p }}
+                     {% csrf_token %}
+                        </div>
+
+                     <div class="regibutton">
+                         <button type="submit" class="btn btn-primary" id="przyciskregi">Utwórz konto</button>
+                         </div>
+                 </form>
+        </div>
+        </div>
+
+
+
+    </div>
+
+    </div>
+{% endblock %}

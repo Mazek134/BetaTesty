@@ -1,0 +1,39 @@
+{% extends 'blog_2/base.html' %}
+{% block content %}
+
+<div class="panellogowania">
+    <div class="oknologowania">
+<div class="polalogowania">
+<div class="tytulogowania">
+<b>LOGIN
+</b>
+
+    </div>
+    <br>
+<form action="{% url 'login' %}" method="post">
+
+    {{form.as_p}}
+
+    <a href="{% url 'register' %}">utworz konto</a>
+    <br>
+    <a href="{% url 'password_change' %}"> zmien haslo</a>
+    <br>
+    <a href="{% url 'password_reset' %}">Zapomniałeś hasła ?</a>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <p>
+    <div class="komunikatylogowania">
+    {{ error_message }}
+</div>
+        <div class="przyciskilogowania">
+        <button class="btn btn-primary" id="przyciskzaloguj" type="submit">Sign in</button>
+        </div>
+    </p>
+
+</form>
+
+
+    </div>
+            </div>
+        </div>
+{% endblock %}
